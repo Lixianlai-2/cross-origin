@@ -14,6 +14,3 @@
 // 通过JSONP访问
 
 const script = document.createElement("script");
-// 通过js得到数据
-script.src = "http://lixianlai:8888/friends.js";
-document.body.appendChild(script);
