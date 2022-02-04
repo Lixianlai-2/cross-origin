@@ -31,6 +31,7 @@ var server = http.createServer(function (request, response) {
   } else if (path === "/index.html") {
     response.statusCode = 200;
     response.setHeader("Content-Type", "text/html;charset=utf-8");
+
     response.write(fs.readFileSync("./public/index.html"));
     response.end();
   } else if (path === "/lixianlai.js") {
@@ -41,18 +42,7 @@ var server = http.createServer(function (request, response) {
   } else if (path === "/friends.json") {
     response.statusCode = 200;
     response.setHeader("Content-Type", "text/json;charset=utf-8");
-    response.setHeader("Access-Control-Allow-Origin", "http://localhost:9990");
     response.write(fs.readFileSync("./public/friends.json"));
-    response.end();
-  } else if (path === "/friends.js") {
-    response.statusCode = 200;
-    // 注意修改为text/javascript
-    response.setHeader("Content-Type", "text/javascript;charset=utf-8");
-    // 得到friends.js中的数据
-    const string = fs.readFileSync("./public/friends.js").toString();
-    const data = fs.readFileSync("./public/friends.json").toString();
-    const string2 = string.replace("{{data}}", data);
-    response.write(string2);
     response.end();
   } else {
     response.statusCode = 404;
