@@ -40,13 +40,13 @@ const JSONP = function (url) {
     window[random] = (data) => {
       console.log(data);
 
-      // 这个resolve有什么作用？
+      // 这个resolve有什么作用？相当于把这个data传递出去，让后面的then可以操作
       resolve(data);
     };
 
     const script = document.createElement("script");
     // 通过js得到数据
-    script.src = `${url}?functionName=${random}`;
+    script.src = `${url}?callback=${random}`;
 
     // 得到script之后将其删掉
     script.onload = () => {
@@ -61,8 +61,6 @@ const JSONP = function (url) {
   });
 };
 
-// JSONP("http://lixianlai:8888/friends.js").then((data) => {
-//   console.log(data);
-// });
-
-JSONP("http://lixianlai:8888/friends.js");
+JSONP("http://lixianlai:8888/friends.js").then((data) => {
+  console.log(data);
+});
