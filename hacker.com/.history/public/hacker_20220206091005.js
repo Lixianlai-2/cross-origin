@@ -7,6 +7,9 @@
 //     alert(request.response);
 //   }
 // };
+
+const { SlowBuffer } = require("buffer");
+
 // request.send();
 
 // ---------------------------------------
@@ -19,5 +22,4 @@ script.src = "http://localhost:8888/friends.js";
 script.onload = () => {
   console.log(window.xxx);
 };
-
 document.body.appendChild(script);

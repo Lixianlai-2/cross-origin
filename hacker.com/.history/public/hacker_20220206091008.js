@@ -7,6 +7,9 @@
 //     alert(request.response);
 //   }
 // };
+
+const { SlowBuffer } = require("buffer");
+
 // request.send();
 
 // ---------------------------------------

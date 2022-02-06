@@ -52,7 +52,7 @@ var server = http.createServer(function (request, response) {
     const string = fs.readFileSync("./public/friends.js").toString();
     // 得到friends.json中的数据
     const data = fs.readFileSync("./public/friends.json").toString();
-    // 将friends.js中的内容被friends.json内容替换
+    //
     const string2 = string.replace("{{data}}", data);
     response.write(string2);
     response.end();
