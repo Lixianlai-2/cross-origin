@@ -41,32 +41,32 @@ var server = http.createServer(function (request, response) {
   } else if (path === "/friends.json") {
     response.statusCode = 200;
     response.setHeader("Content-Type", "text/json;charset=utf-8");
-    response.setHeader("Access-Control-Allow-Origin", "http://localhost:9990");
+    response.setHeader("Access-Control-Allow-Origin", "http://hacker:9990");
     response.write(fs.readFileSync("./public/friends.json"));
     response.end();
   } else if (path === "/friends.js") {
     response.statusCode = 200;
     console.log(request.headers["referer"]);
-    if (request.headers["referer"].indexOf("http://hacker:9990") === 0) {
-      console.log(query);
-      // 注意修改为text/javascript
-      response.setHeader("Content-Type", "text/javascript;charset=utf-8");
-      // 得到friends.js中的数据
-      // const string = fs.readFileSync("./public/friends.js").toString();
-      // 直接把friends.js中的数据拿过来，放入字符串中，也不用toString()了
-      const string = "window[{xxx}]({{data}})";
-      // 得到friends.json中的数据
-      const data = fs.readFileSync("./public/friends.json").toString();
-      // 将friends.js中的内容被friends.json内容替换
-      const string2 = string
-        .replace("{{data}}", data)
-        .replace("{xxx}", query.callback);
-      response.write(string2);
-      response.end();
-    } else {
-      response.statusCode = 404;
-      response.end();
-    }
+    // if (request.headers["referer"].indexOf("http://hacker:9990") === 0) {
+    console.log(query);
+    // 注意修改为text/javascript
+    response.setHeader("Content-Type", "text/javascript;charset=utf-8");
+    // 得到friends.js中的数据
+    // const string = fs.readFileSync("./public/friends.js").toString();
+    // 直接把friends.js中的数据拿过来，放入字符串中，也不用toString()了
+    const string = "window[{xxx}]({{data}})";
+    // 得到friends.json中的数据
+    const data = fs.readFileSync("./public/friends.json").toString();
+    // 将friends.js中的内容被friends.json内容替换
+    const string2 = string
+      .replace("{{data}}", data)
+      .replace("{xxx}", query.callback);
+    response.write(string2);
+    response.end();
+    // } else {
+    //   response.statusCode = 404;
+    //   response.end();
+    // }
   } else {
     response.statusCode = 404;
     response.setHeader("Content-Type", "text/html;charset=utf-8");
