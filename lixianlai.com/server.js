@@ -46,6 +46,9 @@ var server = http.createServer(function (request, response) {
     response.end();
   } else if (path === "/friends.js") {
     response.statusCode = 200;
+    console.log(request.headers["referer"]);
+    // if (request.headers["referer"].indexOf("http://hacker:9990") === 0) {
+    console.log(query);
     // 注意修改为text/javascript
     response.setHeader("Content-Type", "text/javascript;charset=utf-8");
     // 得到friends.js中的数据
@@ -53,9 +56,15 @@ var server = http.createServer(function (request, response) {
     // 得到friends.json中的数据
     const data = fs.readFileSync("./public/friends.json").toString();
     // 将friends.js中的内容被friends.json内容替换
-    const string2 = string.replace("{{data}}", data);
+    const string2 = string
+      .replace("{{data}}", data)
+      .replace("{xxx}", query.functionName);
     response.write(string2);
     response.end();
+    // } else {
+    response.statusCode = 404;
+    response.end();
+    // }
   } else {
     response.statusCode = 404;
     response.setHeader("Content-Type", "text/html;charset=utf-8");
